@@ -1,0 +1,188 @@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<!-- <script src="https://wzrd.in/standalone/formdata-polyfill"></script>
+<script src="https://wzrd.in/standalone/promise-polyfill@latest"></script>
+<script src="https://wzrd.in/standalone/whatwg-fetch@latest"></script> -->
+
+
+<script>
+const scriptURL = 'https://script.google.com/macros/s/AKfycbw9O-btcIYrvPSoJauM6aIcH-7IAOuUXZdA7XhWM4takA_Nn9u6WkD4RyG9rDnH7m2t/exec'
+const form = document.forms['submit-to-google-sheet']
+if(form){
+  form.addEventListener('submit', e => {
+    e.stopPropagation();
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+      
+  })
+}
+
+
+
+
+// menu
+
+
+$(".invisic").hide();
+
+
+$("#menu").click(function() {
+  $(".invisic").show();
+})
+$(".manya").click(function(){
+  $(".invisic").hide();
+})
+
+
+
+
+
+
+// var count =0;
+const arr =[];
+const link = document.getElementsByClassName('andd');
+const input = document.getElementsByName('emm');
+const url = document.getElementsByName('url');
+
+
+console.log(link.length);
+
+
+//it can work with target="_blank" in the link ,with this tag it opens the link in new window
+
+// for (let i = 0; i < link.length; i++) {
+//   link[i].addEventListener('click', ()=>{
+// send();
+//     async function send() {
+//       try {
+// console.log("before executed");
+//         const input_value = input[i].value;
+//         const data = { input_value };
+//         let response = await fetch('/click',{method: 'POST',headers:{
+//   'Content-Type':'application/json'
+// },
+// body:JSON.stringify(data)});
+
+// let result = await response.text();
+// console.log("above executed");
+//       } catch (error) {
+//         // console.log(error);
+//       }
+//     }
+
+
+//   })
+
+
+// }
+
+
+
+// ##new method 
+
+for (let i = 0; i < link.length; i++) {
+  link[i].addEventListener('click', async (event) => {
+
+    // Prevent the default behavior of the link element
+    event.preventDefault();
+
+    try {
+      const input_value = input[i].value;
+      const data = { input_value };
+
+      
+      let response = await fetch('/click', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+   
+      let result = await response.text();
+      console.log("Response from server:", result);
+      
+      
+      if (result === "success") {
+        window.open(link[i].href, '_self');
+      }
+      
+    } catch (error) {
+      console.log(error);
+    }
+  })
+}
+
+
+////////////////////////////////////////////////////collapsable div
+const collapsibles = document.querySelectorAll('.request-collapsible');
+collapsibles.forEach(collapsible => {
+  collapsible.addEventListener('click', () => {
+    collapsible.classList.toggle('active');
+  });
+});
+////////////////////////////////////////////////////collapsable delete div
+
+$(".collapse-delete").hide();
+$(".aa").click(function () {
+  event.stopPropagation();
+  $(".collapse-delete").show();
+  $(".aa").hide();
+})
+
+
+
+
+// $("#widget").click(function(click){
+//   console.log("i got cliked");
+// })
+document.addEventListener('DOMContentLoaded', function() {
+  var coll = document.getElementsByClassName('collapsible');
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener('click', function() {
+      this.classList.toggle('active');
+      var content = this.nextElementSibling;
+      if (content.style.display === 'block') {
+        content.style.display = 'none';
+      } else {
+        content.style.display = 'block';
+      }
+    });
+  }
+});
+
+// var location = document.getElementById("#location");
+// console.log(location);
+async function fetchLocation(){
+  var location = $("#location").find('option:selected').text();
+
+try {
+  let response = await fetch('/logedIn', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({payload:location})
+})
+  let result = await response.text();
+
+  window.location.reload();
+
+} catch (error) {
+  
+}
+
+
+console.log(location);
+}
+
+</script>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
+
+  </body>
+</html>

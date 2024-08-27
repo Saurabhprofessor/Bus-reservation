@@ -1,0 +1,82 @@
+<%- include("partials/adheader") -%>
+
+
+    <h1>uesr page</h1>
+
+    <% for (let i=0; i < UserInfo.length; i++) { %>
+
+
+
+        <% if(UserInfo[i].superUser===true){ %>
+            <% console.log("nothing"); %>
+                <% }else{ %>
+
+
+
+                    <div class="request-collapsible">
+                        <div class="user-container ">
+
+
+                            <div>
+                                <h3>
+                                    <%= UserInfo[i].username%>
+                                </h3>
+                            </div>
+                            <div>
+                                <% if(UserInfo[i].admin===false){ %>
+
+
+                                    <form action="/users" , method="post">
+
+                                        <input type="hidden" name="user_id" value="<%= UserInfo[i]._id %>">
+                                        <div>
+                                            <button type="submit" class="btn btn-success" name="admin_prowers"
+                                                value="true">admin</button>
+                                        </div>
+
+
+
+                                    </form>
+                                    <% } else{ %>
+                                        <div>
+                                            <!-- <p>admin</p> -->
+                                        </div>
+
+                                        <form action="/users" , method="post">
+                                            <input type="hidden" name="user_id" value="<%= UserInfo[i]._id %>">
+                                            <button type="submit" class="btn btn-danger" name="admin_prowers"
+                                                value="false">revoke_admin</button>
+
+                                            <% } %>
+
+                                        </form>
+                                        <hr style="color: white;">
+                            </div>
+                        </div>
+                        <div class="request-content">
+                            <p class="p-collapse">username : <%= UserInfo[i].username %>
+                            </p>
+                            <p class="p-collapse">email : <%= UserInfo[i].email %>
+                            </p>
+
+                            <p class="p-collapse">Accout Created On : <%= UserInfo[i]. createdAt %>
+                            </p>
+                            <p class="p-collapse">Last Seen : <%= UserInfo[i]. updatedAt %>
+                            </p>
+                           
+                            <div class="collapse-delete"  style="display: flex; flex-direction:row;">
+                                <p class="p-collapse">delete user account - </p>
+
+                                <form action="/list-content-delete">
+                                    <button type="submit"
+                                        style="border-radius: 7px; background-color: red; color: aliceblue; border: none; margin-left: 5px;"
+                                        name="Todelete" value="<%= UserInfo[i]._id %>">Delete</button>
+                                </form>
+                            </div>
+                            <p class="aa p-collapse" style="z-index: 1000; display: block;" >...</p>
+                        </div>
+                    </div>
+                    <% } %>
+                        <% } %>
+
+                            <%- include("partials/footer") -%>

@@ -1,0 +1,83 @@
+<%- include("partials/adheader") -%>
+
+    <h1>admin page</h1>
+
+    <select name="location" id="location" onchange="fetchLocation()">
+        <option value="">Choose City</option>
+        <option>all</option>
+        <option> pune</option>
+        <option>mumbai</option>
+    </select>
+
+    <h1>Location: <%= loc %>
+    </h1>
+
+
+    <% data.forEach(data=>{%>
+        <% if( data.city=== loc){ %>
+
+
+            <div class="request-collapsible">
+                <div class="user-container ">
+
+
+
+                    <div>
+                        <h3>
+                            <%= data.firstName + " " + data.lastName%>
+                        </h3>
+                    </div>
+
+                </div>
+                <div class="request-content">
+                    <p class="p-collapse">Name : <%= data.firstName+ " " + data.lastName %>
+                    </p>
+                    <p class="p-collapse">Vaccine Required : <%= data.vaccineType %>
+                    </p>
+                    <p class="p-collapse">Age : <%= data.city %>
+                    </p>
+                    <p class="p-collapse">address : <%= data.address %>
+                    </p>
+                    <p class="p-collapse">City : <%= data.city %>
+                    </p>
+                    <p class="p-collapse">email : <%= data.email %>
+                    </p>
+                    <p class="p-collapse">Registered On : <%= data.createdAt %>
+                    </p>
+                </div>
+            </div>
+
+            <%}else if(loc === "All"){%>
+                <div class="request-collapsible">
+                    <div class="user-container ">
+    
+    
+    
+                        <div>
+                            <h3>
+                                <%= data.firstName + " " + data.lastName%>
+                            </h3>
+                        </div>
+    
+                    </div>
+                    <div class="request-content">
+                        <p class="p-collapse">Name : <%= data.firstName+ " " + data.lastName %>
+                        </p>
+                        <p class="p-collapse">Vaccine Required : <%= data.vaccineType %>
+                        </p>
+                        <p class="p-collapse">Age : <%= data.city %>
+                        </p>
+                        <p class="p-collapse">address : <%= data.address %>
+                        </p>
+                        <p class="p-collapse">City : <%= data.city %>
+                        </p>
+                        <p class="p-collapse">email : <%= data.email %>
+                        </p>
+                        <p class="p-collapse">Registered On : <%= data.createdAt %>
+                        </p>
+                    </div>
+                </div>
+                
+            <%}})%>
+
+                <%- include("partials/footer") -%>
